@@ -1,0 +1,3 @@
+target,address,port,module,title,category,details
+plc1,192.168.1.10,161,snmp,Default community,AUTHENTICATION,public
+plc1,192.168.1.10,4840,opcua,No encryption,ENCRYPTION,SecurityPolicy None offered

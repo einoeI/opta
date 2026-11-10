@@ -1,0 +1,2 @@
+cve,label,fixed_in,reason,source_url
+CVE-2019-10997,Not-affected,2019.0 LTS,CVE description: AXC F 2152 before 2019.0 LTS,https://nvd.nist.gov/vuln/detail/CVE-2019-10997

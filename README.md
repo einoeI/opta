@@ -7,14 +7,15 @@ handling and a reproducible report. Works without an LLM. Authorized testing onl
 First device profile: **Phoenix Contact AXC F 2152** (article 2404267, firmware
 2022.0.8 LTS), a PLCnext/Yocto-Linux controller.
 
-Design and decisions: **`DESIGN.md`**. Status: layout done (step 1), the `otpa`
-package itself is not written yet.
+Design and decisions: **`DESIGN.md`**. Status: steps 1-4 done (layout, `otpa init`,
+engagement.yaml, manifest, components, CVE sources, cves.csv, decisions, scan ingest,
+reachability).
 
 ## Layout
 
 | Folder | What is in it |
 |---|---|
-| `core/` | The `otpa` package (from step 2). `core/legacy/` holds the research scripts that become modules: `probe_vuln_lookup.py` (CIRCL + CERT@VDE coverage check), `crosscheck_firmware.py` (change-notes CVEs vs CIRCL, CVSS enrichment), `ot_ports.py` (port lookup). Each has `--selftest`. |
+| `core/` | The `otpa` package (`core/otpa/`, commands in `core/otpa/modules/`) and its tests (`core/tests/`). `core/legacy/` holds the research scripts that become modules: `probe_vuln_lookup.py` (CIRCL + CERT@VDE coverage check), `crosscheck_firmware.py` (change-notes CVEs vs CIRCL, CVSS enrichment), `ot_ports.py` (port lookup). Each has `--selftest`. |
 | `catalog/` | Hand-maintained data the tool reads: `ot-ports.csv` (see `catalog/README.md`). |
 | `knowledge/` | Knowledge base: `knowledge-base/` (one cited entry per source, start at `INDEX.md`), `sources/` (local PDFs, check licences before sharing), `data/` (generated CSV), `notes/` (research notes, reports, handoff prompt), and the scripts `build_index.py`, `new_entry.py`, `extract_pdf.py`. |
 | `vendor/` | Third-party repos. `ot-security-agent-skills` (selmux, PCAP forensics for Modbus/BACnet/S7/IEC-104) as git submodule. |
@@ -22,12 +23,73 @@ package itself is not written yet.
 
 ## Setup
 
+Needs [uv](https://docs.astral.sh/uv/). Dependencies are in `pyproject.toml`, exact versions
+in `uv.lock`, Python version in `.python-version`.
+
 ```
-python3 -m venv .venv && . .venv/bin/activate
-pip install -r requirements.txt
-pip install -r requirements-docling.txt --extra-index-url https://download.pytorch.org/whl/cpu   # optional
+uv sync                    # .venv with otpa, its deps and pytest
+uv sync --extra docling    # optional, ~2 GB: best PDF extraction, CPU-only PyTorch
 git submodule update --init
 ```
+
+Run everything through uv: `uv run otpa ...`, `uv run pytest`, `uv run python knowledge/build_index.py`.
+After changing dependencies in `pyproject.toml`, run `uv lock` and commit `uv.lock`.
+
+## Using otpa
+
+```
+uv run otpa init axc-testbed --tester "Name" --environment testbed --mode aggressive \
+  --attacker-position control \
+  --target name=plc1,address=192.168.1.10,zone=cell-1,purdue=1,device=phoenix-contact/axc-f-2152/2022.0.8
+uv run pytest              # tests
+```
+
+Leave out any flag and `init` asks for it. `--target` can be repeated; `conduit=` is optional;
+`device` is a folder under `workspace/devices/`. The result is
+`workspace/engagements/<date>-<name>/` with `engagement.yaml` and `manifest.yaml`.
+`engagement.yaml` is validated on every load: `aggressive` needs `testbed`, `runtime` is
+refused, Purdue level is 0-5.
+
+### Components and CVEs for a device
+
+```
+D=phoenix-contact/axc-f-2152/2022.0.8
+uv run otpa components $D --sbom bom.json --pick openssh@8.9p1 --free "codesys runtime@3.5"
+uv run otpa update $D      # network: CIRCL, CSAF feed, OSV -> snapshots/ (~1 min)
+uv run otpa update $D --cvss   # optional: also NVD CVSS for every CVE (~40 min first time without NVD_API_KEY)
+uv run otpa cves $D        # offline: snapshots -> cves.csv
+uv run otpa decide workspace/engagements/<date>-<name> plc1 CVE-2023-46144 Reproduced --evidence evidence/poc.pcap
+```
+
+`update` is the only command that uses the network. It saves every response under
+`snapshots/<date>/<source>/` and lists it with SHA-256 in `snapshots/index.csv`; NVD
+responses already saved are not fetched again. Without `--cvss`, scores come from the
+vendor's CSAF advisories where they have one; `cvss_source` in `cves.csv` says which. For
+`--cvss`, put `export NVD_API_KEY=...` (free from NVD) in `~/.config/otpa/nvd.env` and source
+it from `~/.bashrc`; that is about 10x faster. `cves` reads the newest snapshot per source and key, so the same snapshots
+always give the same `cves.csv`. Labels and source order: see DESIGN.md.
+
+Facts the tool cannot read (e.g. "before 2021.0 LTS" only in a CVE's description) go in
+`overrides.csv` in the device folder: `cve,label,fixed_in,reason,source_url`, label
+`Not-affected` or `Version-candidate`. They apply to every engagement with that device;
+`decide` is for one target in one engagement.
+
+`decide` labels: `Reproduced` (needs `--evidence`), `Not-affected` and `False-positive`
+(need `--reason`).
+
+### Scans and reachability
+
+```
+nmap -sS -sV -p- -oX scan.xml 192.168.1.10           # print/run per your plan and mode
+oida --json-log oida.ndjson opcua ...                 # OIDA: always pass --json-log
+uv run otpa ingest workspace/engagements/<date>-<name> scan.xml oida.ndjson
+uv run otpa ingest workspace/engagements/<date>-<name>   # rebuild only, e.g. after decide or cves
+```
+
+`ingest` copies the files to `evidence/scans/` and rebuilds `ports.csv`, `oida.csv` (OIDA
+findings) and `cves.csv` (per target: device CVEs with `reachable`, `Observed`, decisions)
+from all stored scans. `reachable` is only `no` after a full `-p-` scan of that transport;
+otherwise it stays `unknown`.
 
 ## PDF extraction: which tool and why
 

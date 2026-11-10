@@ -1,0 +1,5 @@
+{"timestamp": "2026-11-10T15:00:00+00:00", "level": "info", "event_type": "info", "module": "modbus", "host": "192.168.1.10", "port": 502, "message": "Connecting"}
+{"timestamp": "2026-11-10T15:00:01+00:00", "level": "error", "event_type": "protocol_error", "module": "modbus", "host": "192.168.1.10", "port": 502, "message": "Connection refused"}
+{"timestamp": "2026-11-10T15:00:02+00:00", "level": "warning", "event_type": "security", "module": "opcua", "host": "192.168.1.10", "port": 4840, "message": "No encryption", "data": {"finding": "No encryption", "details": "SecurityPolicy None offered", "category": "ENCRYPTION"}}
+{"timestamp": "2026-11-10T15:00:03+00:00", "level": "warning", "event_type": "security", "module": "snmp", "host": "192.168.1.10", "port": 161, "message": "Default community", "data": {"finding": "Default community", "details": "public", "category": "AUTHENTICATION"}}
+{"timestamp": "2026-11-10T15:00:04+00:00", "level": "warning", "event_type": "security", "module": "snmp", "host": "192.168.1.99", "port": 161, "message": "Default community", "data": {"finding": "Default community"}}

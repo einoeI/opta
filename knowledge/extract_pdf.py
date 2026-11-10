@@ -5,8 +5,8 @@ with <!-- page N --> markers so every passage can be cited by page.
 Backends (chosen with --backend, default auto = best installed):
   docling  best result, least cleanup: headings, lists, tables, links, correct
            order on multi-column pages, OCR of text in images. Heavy (~2 GB with
-           models, ~5-10 s per page on CPU). Install: pip install -r requirements-docling.txt
-  pypdf    light, always available (requirements.txt): plain text per page, no
+           models, ~5-10 s per page on CPU). Install: uv sync --extra docling
+  pypdf    light, always available (default install): plain text per page, no
            headings or tables, page headers/footers and hyphenation left in.
 
 The extract is a working copy for reading, grep and drafting entries; it is
@@ -62,7 +62,7 @@ def extract(pdf, backend="auto"):
             return clean(with_docling(pdf)), "docling"
         except ImportError:
             if backend == "docling":
-                raise SystemExit("docling not installed: pip install -r requirements-docling.txt")
+                raise SystemExit("docling not installed: uv sync --extra docling")
     return clean(with_pypdf(pdf)), "pypdf"
 
 

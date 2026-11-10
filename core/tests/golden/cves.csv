@@ -1,0 +1,10 @@
+cve,component,version,source,cvss_version,score,vector,cvss_source,reachable,label,vendor_fixed_in,note
+CVE-2014-1402,jinja2,2.4.1,osv,,,,,unknown,Version-candidate,2.7.2,GHSA-8r7q-cvjq-x353
+CVE-2019-10906,jinja2,2.4.1,osv,,,,,unknown,Version-candidate,2.10.1,GHSA-462w-v97r-4m45
+CVE-2019-10997,firmware,,circl;override,,,,,unknown,Not-affected,2019.0 LTS,CVE record: no usable version range; override: CVE description: AXC F 2152 before 2019.0 LTS
+CVE-2021-3672,c-ares,1.17.1,change-notes,2.0,6.8,AV:N/AC:M/Au:N/C:P/I:P/A:P,nvd,unknown,Version-candidate,2022.6.0,
+CVE-2021-3672,c-ares,1.17.1,change-notes,3.1,5.6,CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L,nvd,unknown,Version-candidate,2022.6.0,
+CVE-2021-34570,firmware,,circl,,,,,unknown,Not-affected,2021.0.5 LTS,CVE record: firmware outside affected versions
+CVE-2022-29824,libxml2,,change-notes;csaf:VDE-2022-046,3.1,6.5,CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H,csaf:VDE-2022-046,unknown,Version-candidate,2022.6.0,VDE-2022-046: fixed or not affected in this firmware
+CVE-2023-46144,firmware,,circl,,,,,unknown,Version-candidate,,
+CVE-2024-12705,firmware,,csaf:VDE-2025-053,3.1,7.5,CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H,csaf:VDE-2025-053,unknown,Version-candidate,2025.0.2,VDE-2025-053: known affected

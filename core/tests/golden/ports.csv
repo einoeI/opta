@@ -1,0 +1,6 @@
+target,address,port,transport,state,service,product,version,tunnel,source
+plc1,192.168.1.10,22,tcp,open,ssh,OpenSSH,8.9p1,,nmap
+plc1,192.168.1.10,161,,open,snmp,,,,oida:snmp
+plc1,192.168.1.10,443,tcp,open,https,nginx,,ssl,nmap
+plc1,192.168.1.10,4840,tcp,open,opcua-tcp,,,,nmap;oida:opcua
+plc1,192.168.1.10,8080,tcp,filtered,http-proxy,,,,nmap

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<nmaprun scanner="nmap" args="nmap -sS -sV -p- -oX nmap-tcp-full.xml 192.168.1.0/24" start="1794300000" version="7.95" xmloutputversion="1.05">
+<scaninfo type="syn" protocol="tcp" numservices="65535" services="1-65535"/>
+<host starttime="1794300001" endtime="1794300100"><status state="up" reason="arp-response"/>
+<address addr="192.168.1.10" addrtype="ipv4"/>
+<ports><extraports state="closed" count="65531"/>
+<port protocol="tcp" portid="22"><state state="open" reason="syn-ack"/><service name="ssh" product="OpenSSH" version="8.9p1" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="443"><state state="open" reason="syn-ack"/><service name="https" product="nginx" tunnel="ssl" method="probed" conf="10"/></port>
+<port protocol="tcp" portid="4840"><state state="open" reason="syn-ack"/><service name="opcua-tcp" method="table" conf="3"/></port>
+<port protocol="tcp" portid="8080"><state state="filtered" reason="no-response"/><service name="http-proxy" method="table" conf="3"/></port>
+</ports></host>
+<host><status state="up" reason="arp-response"/><address addr="192.168.1.99" addrtype="ipv4"/>
+<ports><port protocol="tcp" portid="80"><state state="open" reason="syn-ack"/><service name="http"/></port></ports></host>
+</nmaprun>

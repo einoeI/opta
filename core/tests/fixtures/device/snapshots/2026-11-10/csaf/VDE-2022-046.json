@@ -1,0 +1,468 @@
+{
+ "document": {
+  "tracking": {
+   "id": "VDE-2022-046"
+  }
+ },
+ "product_tree": {
+  "branches": [
+   {
+    "branches": [
+     {
+      "branches": [
+       {
+        "category": "product_name",
+        "name": "AXC F 1152",
+        "product": {
+         "name": "AXC F 1152",
+         "product_id": "CSAFPID-11001",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1151412"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "AXC F 2152",
+        "product": {
+         "name": "AXC F 2152",
+         "product_id": "CSAFPID-11002",
+         "product_identification_helper": {
+          "model_numbers": [
+           "2404267"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "AXC F 3152",
+        "product": {
+         "name": "AXC F 3152",
+         "product_id": "CSAFPID-11003",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1069208"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "BPC 9102S",
+        "product": {
+         "name": "BPC 9102S",
+         "product_id": "CSAFPID-11004",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1246285"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "ENERGY AXC PU",
+        "product": {
+         "name": "ENERGY AXC PU",
+         "product_id": "CSAFPID-11005",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1264327"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "EPC 1502",
+        "product": {
+         "name": "EPC 1502",
+         "product_id": "CSAFPID-11006",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1185416"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "EPC 1522",
+        "product": {
+         "name": "EPC 1522",
+         "product_id": "CSAFPID-11007",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1185423"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "RFC 4072S",
+        "product": {
+         "name": "RFC 4072S",
+         "product_id": "CSAFPID-11008",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1051328"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "SMARTRTU AXC SG",
+        "product": {
+         "name": "SMARTRTU AXC SG",
+         "product_id": "CSAFPID-11009",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1110435"
+          ]
+         }
+        }
+       }
+      ],
+      "category": "product_family",
+      "name": "Hardware"
+     },
+     {
+      "branches": [
+       {
+        "category": "product_version_range",
+        "name": "<2022.0.8 LTS",
+        "product": {
+         "name": "Firmware <2022.0.8 LTS",
+         "product_id": "CSAFPID-21001"
+        }
+       },
+       {
+        "category": "product_version_range",
+        "name": "<V04.14.00.00",
+        "product": {
+         "name": "Firmware <V04.14.00.00",
+         "product_id": "CSAFPID-21002"
+        }
+       },
+       {
+        "category": "product_version_range",
+        "name": "<2022.0.7 LTS",
+        "product": {
+         "name": "Firmware <2022.0.7 LTS",
+         "product_id": "CSAFPID-21003"
+        }
+       },
+       {
+        "category": "product_version_range",
+        "name": "<V01.09.00.00",
+        "product": {
+         "name": "Firmware <V01.09.00.00",
+         "product_id": "CSAFPID-21004"
+        }
+       },
+       {
+        "category": "product_version",
+        "name": "2022.0.8 LTS",
+        "product": {
+         "name": "Firmware 2022.0.8 LTS",
+         "product_id": "CSAFPID-22001"
+        }
+       },
+       {
+        "category": "product_version",
+        "name": "V04.14.00.00",
+        "product": {
+         "name": "Firmware V04.14.00.00",
+         "product_id": "CSAFPID-22002"
+        }
+       },
+       {
+        "category": "product_version",
+        "name": "2022.0.7 LTS",
+        "product": {
+         "name": "Firmware 2022.0.7 LTS",
+         "product_id": "CSAFPID-22003"
+        }
+       },
+       {
+        "category": "product_version",
+        "name": "V01.09.00.00",
+        "product": {
+         "name": "Firmware V01.09.00.00",
+         "product_id": "CSAFPID-22004"
+        }
+       }
+      ],
+      "category": "product_family",
+      "name": "Firmware"
+     }
+    ],
+    "category": "vendor",
+    "name": "PHOENIX CONTACT"
+   }
+  ],
+  "product_groups": [
+   {
+    "group_id": "CSAFGID-0001",
+    "product_ids": [
+     "CSAFPID-31001",
+     "CSAFPID-31002",
+     "CSAFPID-31003",
+     "CSAFPID-31004",
+     "CSAFPID-31005",
+     "CSAFPID-31006",
+     "CSAFPID-31007",
+     "CSAFPID-31008",
+     "CSAFPID-31009"
+    ],
+    "summary": "Affected Products."
+   },
+   {
+    "group_id": "CSAFGID-0002",
+    "product_ids": [
+     "CSAFPID-32001",
+     "CSAFPID-32002",
+     "CSAFPID-32003",
+     "CSAFPID-32004",
+     "CSAFPID-32005",
+     "CSAFPID-32006",
+     "CSAFPID-32007",
+     "CSAFPID-32008",
+     "CSAFPID-32009"
+    ],
+    "summary": "Fixed Products."
+   }
+  ],
+  "relationships": [
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <2022.0.8 LTS installed on AXC F 1152",
+     "product_id": "CSAFPID-31001"
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11001"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2022.0.8 LTS installed on AXC F 1152",
+     "product_id": "CSAFPID-32001"
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11001"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <2022.0.8 LTS installed on AXC F 2152",
+     "product_id": "CSAFPID-31002"
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11002"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2022.0.8 LTS installed on AXC F 2152",
+     "product_id": "CSAFPID-32002"
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11002"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <2022.0.8 LTS installed on AXC F 3152",
+     "product_id": "CSAFPID-31003"
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11003"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2022.0.8 LTS installed on AXC F 3152",
+     "product_id": "CSAFPID-32003"
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11003"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <2022.0.8 LTS installed on BPC 9102S",
+     "product_id": "CSAFPID-31004"
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11004"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2022.0.8 LTS installed on BPC 9102S",
+     "product_id": "CSAFPID-32004"
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11004"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <V04.14.00.00 installed on ENERGY AXC PU",
+     "product_id": "CSAFPID-31005"
+    },
+    "product_reference": "CSAFPID-21002",
+    "relates_to_product_reference": "CSAFPID-11005"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware V04.14.00.00 installed on ENERGY AXC PU",
+     "product_id": "CSAFPID-32005"
+    },
+    "product_reference": "CSAFPID-22002",
+    "relates_to_product_reference": "CSAFPID-11005"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <2022.0.7 LTS installed on EPC 1502",
+     "product_id": "CSAFPID-31006"
+    },
+    "product_reference": "CSAFPID-21003",
+    "relates_to_product_reference": "CSAFPID-11006"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2022.0.7 LTS installed on EPC 1502",
+     "product_id": "CSAFPID-32006"
+    },
+    "product_reference": "CSAFPID-22003",
+    "relates_to_product_reference": "CSAFPID-11006"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <2022.0.7 LTS installed on EPC 1522",
+     "product_id": "CSAFPID-31007"
+    },
+    "product_reference": "CSAFPID-21003",
+    "relates_to_product_reference": "CSAFPID-11007"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2022.0.7 LTS installed on EPC 1522",
+     "product_id": "CSAFPID-32007"
+    },
+    "product_reference": "CSAFPID-22003",
+    "relates_to_product_reference": "CSAFPID-11007"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <2022.0.8 LTS installed on RFC 4072S",
+     "product_id": "CSAFPID-31008"
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11008"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2022.0.8 LTS installed on RFC 4072S",
+     "product_id": "CSAFPID-32008"
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11008"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware <V01.09.00.00 installed on SMARTRTU AXC SG",
+     "product_id": "CSAFPID-31009"
+    },
+    "product_reference": "CSAFPID-21004",
+    "relates_to_product_reference": "CSAFPID-11009"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware V01.09.00.00 installed on SMARTRTU AXC SG",
+     "product_id": "CSAFPID-32009"
+    },
+    "product_reference": "CSAFPID-22004",
+    "relates_to_product_reference": "CSAFPID-11009"
+   }
+  ]
+ },
+ "vulnerabilities": [
+  {
+   "cve": "CVE-2022-29824",
+   "product_status": {
+    "fixed": [
+     "CSAFPID-32001",
+     "CSAFPID-32002",
+     "CSAFPID-32003",
+     "CSAFPID-32004",
+     "CSAFPID-32005",
+     "CSAFPID-32006",
+     "CSAFPID-32007",
+     "CSAFPID-32008",
+     "CSAFPID-32009"
+    ],
+    "known_affected": [
+     "CSAFPID-31001",
+     "CSAFPID-31002",
+     "CSAFPID-31003",
+     "CSAFPID-31004",
+     "CSAFPID-31005",
+     "CSAFPID-31006",
+     "CSAFPID-31007",
+     "CSAFPID-31008",
+     "CSAFPID-31009"
+    ]
+   },
+   "scores": [
+    {
+     "cvss_v3": {
+      "attackComplexity": "LOW",
+      "attackVector": "NETWORK",
+      "availabilityImpact": "HIGH",
+      "baseScore": 6.5,
+      "baseSeverity": "MEDIUM",
+      "confidentialityImpact": "NONE",
+      "environmentalScore": 6.5,
+      "environmentalSeverity": "MEDIUM",
+      "integrityImpact": "NONE",
+      "privilegesRequired": "NONE",
+      "scope": "UNCHANGED",
+      "temporalScore": 6.5,
+      "temporalSeverity": "MEDIUM",
+      "userInteraction": "REQUIRED",
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+      "version": "3.1"
+     },
+     "products": [
+      "CSAFPID-31001",
+      "CSAFPID-31002",
+      "CSAFPID-31003",
+      "CSAFPID-31004",
+      "CSAFPID-31005",
+      "CSAFPID-31006",
+      "CSAFPID-31007",
+      "CSAFPID-31008",
+      "CSAFPID-31009"
+     ]
+    }
+   ]
+  }
+ ]
+}

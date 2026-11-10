@@ -1,0 +1,8 @@
+target,cve,component,version,source,cvss_version,score,vector,cvss_source,reachable,label,vendor_fixed_in,note
+plc1,CVE-2023-1,openssh,8.9p1,osv,,,,,yes,Observed,,nmap: OpenSSH 8.9p1 on 22/tcp
+plc1,CVE-2023-2,nginx,,change-notes,,,,,yes,False-positive,,tester: WBM disabled
+plc1,CVE-2023-3,net-snmp,,change-notes,,,,,yes,Version-candidate,,
+plc1,CVE-2023-4,rsync,,change-notes,,,,,no,Version-candidate,,
+plc1,CVE-2023-5,strongswan,,change-notes,,,,,unknown,Version-candidate,,
+plc1,CVE-2023-6,glibc,,change-notes,,,,,unknown,Version-candidate,,
+plc1,CVE-2023-7,openssh,8.9p1,osv,,,,,yes,Not-affected,,vendor

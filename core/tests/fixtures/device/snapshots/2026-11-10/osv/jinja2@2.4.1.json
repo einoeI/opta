@@ -1,0 +1,52 @@
+{
+ "vulns": [
+  {
+   "affected": [
+    {
+     "ranges": [
+      {
+       "events": [
+        {
+         "introduced": "0"
+        },
+        {
+         "fixed": "2.10.1"
+        }
+       ],
+       "type": "ECOSYSTEM"
+      }
+     ]
+    }
+   ],
+   "aliases": [
+    "CVE-2019-10906",
+    "PYSEC-2019-217"
+   ],
+   "id": "GHSA-462w-v97r-4m45"
+  },
+  {
+   "affected": [
+    {
+     "ranges": [
+      {
+       "events": [
+        {
+         "introduced": "0"
+        },
+        {
+         "fixed": "2.7.2"
+        }
+       ],
+       "type": "ECOSYSTEM"
+      }
+     ]
+    }
+   ],
+   "aliases": [
+    "CVE-2014-1402",
+    "PYSEC-2014-8"
+   ],
+   "id": "GHSA-8r7q-cvjq-x353"
+  }
+ ]
+}

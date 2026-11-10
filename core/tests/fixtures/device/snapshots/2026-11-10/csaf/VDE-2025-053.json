@@ -1,0 +1,326 @@
+{
+ "document": {
+  "tracking": {
+   "id": "VDE-2025-053"
+  }
+ },
+ "product_tree": {
+  "branches": [
+   {
+    "branches": [
+     {
+      "branches": [
+       {
+        "category": "product_name",
+        "name": "AXC F 1152",
+        "product": {
+         "name": "AXC F 1152",
+         "product_id": "CSAFPID-11001",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1151412"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "AXC F 2152",
+        "product": {
+         "name": "AXC F 2152",
+         "product_id": "CSAFPID-11002",
+         "product_identification_helper": {
+          "model_numbers": [
+           "2404267"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "AXC F 3152",
+        "product": {
+         "name": "AXC F 3152",
+         "product_id": "CSAFPID-11003",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1069208"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "RFC 4072S",
+        "product": {
+         "name": "RFC 4072S",
+         "product_id": "CSAFPID-11004",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1051328"
+          ]
+         }
+        }
+       },
+       {
+        "category": "product_name",
+        "name": "BPC 9102S",
+        "product": {
+         "name": "BPC 9102S",
+         "product_id": "CSAFPID-11011",
+         "product_identification_helper": {
+          "model_numbers": [
+           "1246285"
+          ]
+         }
+        }
+       }
+      ],
+      "category": "product_family",
+      "name": "Hardware"
+     },
+     {
+      "branches": [
+       {
+        "category": "product_version_range",
+        "name": "<2025.0.2",
+        "product": {
+         "name": "Firmware < 2025.0.2",
+         "product_id": "CSAFPID-21001"
+        }
+       },
+       {
+        "category": "product_version",
+        "name": "2025.0.2",
+        "product": {
+         "name": "Firmware 2025.0.2",
+         "product_id": "CSAFPID-22001"
+        }
+       }
+      ],
+      "category": "product_family",
+      "name": "Firmware"
+     }
+    ],
+    "category": "vendor",
+    "name": "Phoenix Contact GmbH & Co. KG"
+   }
+  ],
+  "product_groups": [
+   {
+    "group_id": "CSAFGID-61001",
+    "product_ids": [
+     "CSAFPID-31001",
+     "CSAFPID-31002",
+     "CSAFPID-31004",
+     "CSAFPID-31005",
+     "CSAFPID-31007"
+    ],
+    "summary": "Affected Products."
+   },
+   {
+    "group_id": "CSAFGID-62001",
+    "product_ids": [
+     "CSAFPID-32001",
+     "CSAFPID-32002",
+     "CSAFPID-32004",
+     "CSAFPID-32005",
+     "CSAFPID-32007"
+    ],
+    "summary": "Fixed Product."
+   }
+  ],
+  "relationships": [
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware < 2025.0.2 installed on AXC F 1152",
+     "product_id": "CSAFPID-31001",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1151412"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11001"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2025.0.2 installed on AXC F 1152",
+     "product_id": "CSAFPID-32001",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1151412"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11001"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware < 2025.0.2 installed on AXC F 2152",
+     "product_id": "CSAFPID-31002",
+     "product_identification_helper": {
+      "model_numbers": [
+       "2404267"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11002"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2025.0.2 installed on AXC F 2152",
+     "product_id": "CSAFPID-32002",
+     "product_identification_helper": {
+      "model_numbers": [
+       "2404267"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11002"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware < 2025.0.2 installed on AXC F 3152",
+     "product_id": "CSAFPID-31004",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1069208"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11003"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2025.0.2 installed on AXC F 3152",
+     "product_id": "CSAFPID-32004",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1069208"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11003"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware < 2025.0.2 installed on RFC 4072S",
+     "product_id": "CSAFPID-31005",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1051328"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11004"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2025.0.2 installed on RFC 4072S",
+     "product_id": "CSAFPID-32005",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1051328"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11004"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware < 2025.0.2 installed on BPC 9102S",
+     "product_id": "CSAFPID-31007",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1246285"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-21001",
+    "relates_to_product_reference": "CSAFPID-11011"
+   },
+   {
+    "category": "installed_on",
+    "full_product_name": {
+     "name": "Firmware 2025.0.2 installed on BPC 9102S",
+     "product_id": "CSAFPID-32007",
+     "product_identification_helper": {
+      "model_numbers": [
+       "1246285"
+      ]
+     }
+    },
+    "product_reference": "CSAFPID-22001",
+    "relates_to_product_reference": "CSAFPID-11011"
+   }
+  ]
+ },
+ "vulnerabilities": [
+  {
+   "cve": "CVE-2024-12705",
+   "product_status": {
+    "fixed": [
+     "CSAFPID-32001",
+     "CSAFPID-32002",
+     "CSAFPID-32004",
+     "CSAFPID-32005",
+     "CSAFPID-32007"
+    ],
+    "known_affected": [
+     "CSAFPID-31001",
+     "CSAFPID-31002",
+     "CSAFPID-31004",
+     "CSAFPID-31005",
+     "CSAFPID-31007"
+    ]
+   },
+   "scores": [
+    {
+     "cvss_v3": {
+      "attackComplexity": "LOW",
+      "attackVector": "NETWORK",
+      "availabilityImpact": "HIGH",
+      "baseScore": 7.5,
+      "baseSeverity": "HIGH",
+      "confidentialityImpact": "NONE",
+      "environmentalScore": 7.5,
+      "environmentalSeverity": "HIGH",
+      "integrityImpact": "NONE",
+      "privilegesRequired": "NONE",
+      "scope": "UNCHANGED",
+      "temporalScore": 7.5,
+      "temporalSeverity": "HIGH",
+      "userInteraction": "NONE",
+      "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "version": "3.1"
+     },
+     "products": [
+      "CSAFPID-31001",
+      "CSAFPID-31002",
+      "CSAFPID-31004",
+      "CSAFPID-31005",
+      "CSAFPID-31007"
+     ]
+    }
+   ]
+  }
+ ]
+}

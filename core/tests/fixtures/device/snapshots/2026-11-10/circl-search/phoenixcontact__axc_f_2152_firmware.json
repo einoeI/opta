@@ -1,0 +1,131 @@
+{
+ "results": {
+  "cvelistv5": [
+   [
+    "cve-2023-46144",
+    {
+     "containers": {
+      "cna": {
+       "affected": [
+        {
+         "defaultStatus": "unaffected",
+         "product": "AXC F 2152",
+         "vendor": "PHOENIX CONTACT",
+         "versions": [
+          {
+           "lessThanOrEqual": "2024.0",
+           "status": "affected",
+           "version": "0",
+           "versionType": "semver"
+          }
+         ]
+        }
+       ]
+      }
+     },
+     "cveMetadata": {
+      "cveId": "CVE-2023-46144"
+     }
+    }
+   ],
+   [
+    "cve-2021-34570",
+    {
+     "containers": {
+      "cna": {
+       "affected": [
+        {
+         "product": "AXC F",
+         "vendor": "Phoenix Contact",
+         "versions": [
+          {
+           "lessThan": "2021.0.5 LTS",
+           "status": "affected",
+           "version": "AXC F 1152 (1151412)",
+           "versionType": "custom"
+          },
+          {
+           "lessThan": "2021.0.5 LTS",
+           "status": "affected",
+           "version": "AXC F 2152 (2404267)",
+           "versionType": "custom"
+          },
+          {
+           "lessThan": "2021.0.5 LTS",
+           "status": "affected",
+           "version": "AXC F 3152 (1069208)",
+           "versionType": "custom"
+          },
+          {
+           "lessThan": "2021.0.5 LTS",
+           "status": "affected",
+           "version": "AXC F 2152 Starterkit (1046568)",
+           "versionType": "custom"
+          }
+         ]
+        }
+       ]
+      }
+     },
+     "cveMetadata": {
+      "cveId": "CVE-2021-34570"
+     }
+    }
+   ],
+   [
+    "cve-2019-10997",
+    {
+     "containers": {
+      "cna": {
+       "affected": [
+        {
+         "product": "n/a",
+         "vendor": "n/a",
+         "versions": [
+          {
+           "status": "affected",
+           "version": "n/a"
+          }
+         ]
+        }
+       ]
+      }
+     },
+     "cveMetadata": {
+      "cveId": "CVE-2019-10997"
+     }
+    }
+   ]
+  ],
+  "nvd": [
+   [
+    "cve-2023-46144",
+    {
+     "containers": {
+      "cna": {
+       "affected": [
+        {
+         "defaultStatus": "unaffected",
+         "product": "AXC F 2152",
+         "vendor": "PHOENIX CONTACT",
+         "versions": [
+          {
+           "lessThanOrEqual": "2024.0",
+           "status": "affected",
+           "version": "0",
+           "versionType": "semver"
+          }
+         ]
+        }
+       ]
+      }
+     },
+     "cveMetadata": {
+      "cveId": "CVE-2023-46144"
+     }
+    }
+   ]
+  ]
+ },
+ "total_count": 4
+}

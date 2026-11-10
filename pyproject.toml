@@ -1,0 +1,49 @@
+# Setup: `uv sync` (add `--extra docling` for the PDF extractor). Exact versions are in uv.lock.
+# Non-pip tools (nmap, pandoc, syft) are checked by `otpa doctor`.
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "otpa"
+dynamic = ["version"]
+requires-python = ">=3.11"
+dependencies = [
+    "PyYAML~=6.0.3",         # engagement.yaml, plan.yaml, decisions.yaml, manifest.yaml. MIT.
+    "pypdf~=7.0",            # knowledge/new_entry.py, extract_pdf.py. BSD-3-Clause.
+    "oida-ics[all]~=1.0.6",  # active OT testing on the testbed. AGPL-3.0: called as subprocess, never imported.
+]
+
+[project.optional-dependencies]
+# Best PDF -> Markdown for knowledge/extract_pdf.py. MIT. ~1.5 GB with CPU PyTorch,
+# plus ~0.5 GB models downloaded on first run into ~/.cache/huggingface
+# (air-gapped: run once online, then copy that cache). ~5-10 s per page on CPU.
+docling = ["docling~=2.150", "torch", "torchvision"]  # torch listed so uv takes it from the CPU index
+
+[dependency-groups]
+dev = ["pytest~=9.2"]  # MIT.
+
+[project.scripts]
+otpa = "otpa.cli:main"
+
+[tool.setuptools.dynamic]
+version = {attr = "otpa.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["core"]
+include = ["otpa*"]
+
+[tool.pytest.ini_options]
+testpaths = ["core/tests"]
+pythonpath = ["core"]
+
+# CPU-only PyTorch for docling, avoids the multi-GB CUDA build. macOS uses PyPI (CPU anyway).
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+torchvision = [{ index = "pytorch-cpu", marker = "sys_platform != 'darwin'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

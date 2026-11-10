@@ -4,6 +4,7 @@ Hand-maintained data the tool reads. Plain CSV/YAML, every row cites its source.
 
 | File | What it is |
 |---|---|
+| `components.csv` | Components for the `otpa components --pick` picker, with CPE and the services they listen on. |
 | `ot-ports.csv` | OT/ICS ports, generic and vendor lists. Run `python3 core/legacy/ot_ports.py --selftest` after editing. |
 
 ## ot-ports.csv
@@ -26,3 +27,18 @@ One row per port (or port range) and transport. The same port can appear more th
 | `accessed` | Date the source was read (YYYY-MM-DD). | `2026-11-10` |
 
 Sources are described in `knowledge/knowledge-base/frameworks/iana-service-port-registry.md`, `knowledge/knowledge-base/tools/nmap-ics-nse-scripts.md`, `knowledge/knowledge-base/tools/digitalbond-redpoint.md` and `knowledge/knowledge-base/phoenix-contact/plcnext-port-list.md`. A port number alone never proves the protocol: confirm by passive capture or a protocol-aware probe.
+
+## components.csv
+
+One row per component. `otpa components --pick NAME@VERSION` matches `name` or an alias; SBOM components are matched by CPE or name to get `service` and `ports`.
+
+| Column | Meaning | Example |
+|---|---|---|
+| `name` | Short lowercase name, used in `cves.csv`. | `openssh` |
+| `aliases` | Other spellings (vendor change notes, SBOMs), separated by `;`. | `kernel;linux` |
+| `cpe` | CPE `vendor:product`, checked to exist in the NVD CPE dictionary. | `openbsd:openssh` |
+| `purl` | Package URL without version, only where OSV.dev can query it (not for plain C libraries). | `pkg:pypi/jinja2` |
+| `service` | nmap service names this component serves, separated by `;`. Empty for libraries. | `ssh` |
+| `ports` | Well-known default ports (IANA), `port/transport`, separated by `;`. | `22/tcp` |
+| `source_url` | NVD CPE API query that confirms the CPE. | |
+| `accessed` | Date checked. | `2026-11-10` |

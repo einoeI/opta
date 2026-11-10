@@ -1,0 +1,3 @@
+cve,component,first_fixed_in,listed_in,note
+CVE-2021-3672,C-ares,2022.6.0,2022.6.0,
+CVE-2022-29824,Libxml2,2022.6.0,2022.6.0,

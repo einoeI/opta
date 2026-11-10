@@ -1,0 +1,13 @@
+name: axc-testbed
+date: '2026-11-10'
+tester: Leonie Greber
+environment: testbed
+mode: aggressive
+attacker_position: control
+targets:
+- name: plc1
+  address: 192.168.1.10
+  zone: cell-1
+  conduit: null
+  purdue_level: 1
+  device: phoenix-contact/axc-f-2152/2022.0.8

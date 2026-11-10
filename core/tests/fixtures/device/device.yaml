@@ -1,0 +1,8 @@
+vendor: Phoenix Contact
+model: AXC F 2152
+article_no: "2404267"
+firmware: 2022.0.8 LTS
+circl_products: [[phoenixcontact, axc_f_2152_firmware]]
+csaf_feed: https://example.test/feed.json
+evidence_sources:
+  change_notes: change-notes.csv
