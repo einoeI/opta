@@ -1,0 +1,130 @@
+engagement: 2026-11-10-axc-testbed
+environment: testbed
+mode: aggressive
+attacker_position: control
+catalog: test catalog
+targets:
+- target: plc0
+  address: 192.168.1.5
+  purdue_level: 0
+  device: phoenix-contact/axc-f-2152/2022.0.8
+  checks:
+  - id: OT01-01
+    owasp_ot: 1
+    owasp_title: Unknown Assets and Unmanaged External Access
+    title: Passive inventory from a capture
+    kind: automated
+    module: ingest
+    commands:
+    - oida pcap <capture> -A --json-log evidence/scans/oida-pcap-plc0.ndjson
+    attck_ics:
+    - T0842
+    kb_refs:
+    - owasp/owasp-ot-top-10-2025.md
+  - id: OT05-01
+    owasp_ot: 5
+    owasp_title: Insufficient Access Control
+    title: Access matrix
+    kind: manual
+    question: Is there a written access matrix?
+    commands: []
+    attck_ics: []
+    kb_refs:
+    - owasp/owasp-ot-top-10-2025.md
+  - id: OT07-01
+    owasp_ot: 7
+    owasp_title: Broken Zones and Conduits Design
+    title: Layer-2 discovery in the zone
+    kind: automated
+    module: ingest
+    commands:
+    - oida discovery <interface> --json-log evidence/scans/oida-discovery-plc0.ndjson
+    attck_ics:
+    - T0846
+    kb_refs:
+    - tools/oida.md
+  excluded:
+  - id: OT01-02
+    title: Service inventory
+    reason: 'Purdue L0: no active checks'
+  - id: OT04-01
+    title: Behaviour under load on the testbed
+    reason: 'Purdue L0: no active checks'
+  - id: OT09-01
+    title: OPC UA endpoint security
+    reason: 'Purdue L0: no active checks'
+- target: plc1
+  address: 192.168.1.10
+  purdue_level: 1
+  device: phoenix-contact/axc-f-2152/2022.0.8
+  checks:
+  - id: OT01-01
+    owasp_ot: 1
+    owasp_title: Unknown Assets and Unmanaged External Access
+    title: Passive inventory from a capture
+    kind: automated
+    module: ingest
+    commands:
+    - oida pcap <capture> -A --json-log evidence/scans/oida-pcap-plc1.ndjson
+    attck_ics:
+    - T0842
+    kb_refs:
+    - owasp/owasp-ot-top-10-2025.md
+  - id: OT01-02
+    owasp_ot: 1
+    owasp_title: Unknown Assets and Unmanaged External Access
+    title: Service inventory
+    kind: automated
+    module: ingest
+    commands:
+    - nmap -sS -sV -p- -oX evidence/scans/nmap-plc1-full.xml 192.168.1.10
+    attck_ics:
+    - T0846
+    kb_refs:
+    - tools/oida.md
+  - id: OT04-01
+    owasp_ot: 4
+    owasp_title: Loss of Availability
+    title: Behaviour under load on the testbed
+    kind: manual
+    question: Does the process keep running under network load?
+    commands: []
+    attck_ics:
+    - T0814
+    kb_refs:
+    - owasp/owasp-ot-top-10-2025.md
+  - id: OT05-01
+    owasp_ot: 5
+    owasp_title: Insufficient Access Control
+    title: Access matrix
+    kind: manual
+    question: Is there a written access matrix?
+    commands: []
+    attck_ics: []
+    kb_refs:
+    - owasp/owasp-ot-top-10-2025.md
+  - id: OT07-01
+    owasp_ot: 7
+    owasp_title: Broken Zones and Conduits Design
+    title: Layer-2 discovery in the zone
+    kind: automated
+    module: ingest
+    commands:
+    - oida discovery <interface> --json-log evidence/scans/oida-discovery-plc1.ndjson
+    attck_ics:
+    - T0846
+    kb_refs:
+    - tools/oida.md
+  - id: OT09-01
+    owasp_ot: 9
+    owasp_title: Insufficient Security Capabilities
+    title: OPC UA endpoint security
+    kind: automated
+    module: ingest
+    commands:
+    - oida opcua opc.tcp://192.168.1.10:4840 --get-endpoints --json-log evidence/scans/oida-opcua-plc1.ndjson
+    attck_ics:
+    - T0888
+    kb_refs:
+    - tools/oida.md
+  excluded: []

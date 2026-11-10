@@ -1,0 +1,85 @@
+source: test catalog
+items:
+  1: Unknown Assets and Unmanaged External Access
+  2: Devices with known Vulnerabilities/Issues
+  3: Inadequate Supplier/Supply Chain Management
+  4: Loss of Availability
+  5: Insufficient Access Control
+  6: Missing Incident Detection/Reaction Capabilities
+  7: Broken Zones and Conduits Design
+  8: Missing Awareness
+  9: Insufficient Security Capabilities
+  10: Missing Hardening
+checks:
+  - id: OT01-01
+    owasp_ot: 1
+    title: Passive inventory from a capture
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    module: ingest
+    commands:
+      all: ["oida pcap {capture} -A --json-log evidence/scans/oida-pcap-{target}.ndjson"]
+    attck_ics: [T0842]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+  - id: OT01-02
+    owasp_ot: 1
+    title: Service inventory
+    active: true
+    modes: [safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    module: ingest
+    commands:
+      safe: ["nmap -sT -sV -p {vendor_tcp_ports} -oX evidence/scans/nmap-{target}.xml {address}"]
+      aggressive: ["nmap -sS -sV -p- -oX evidence/scans/nmap-{target}-full.xml {address}"]
+    attck_ics: [T0846]
+    kb_refs: [tools/oida.md]
+  - id: OT04-01
+    owasp_ot: 4
+    title: Behaviour under load on the testbed
+    active: true
+    modes: [aggressive]
+    zone_required: false
+    purdue_max: 2
+    manual: true
+    question: Does the process keep running under network load?
+    attck_ics: [T0814]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+  - id: OT05-01
+    owasp_ot: 5
+    title: Access matrix
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: Is there a written access matrix?
+    attck_ics: []
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+  - id: OT07-01
+    owasp_ot: 7
+    title: Layer-2 discovery in the zone
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: true
+    purdue_max: 5
+    module: ingest
+    commands:
+      all: ["oida discovery {interface} --json-log evidence/scans/oida-discovery-{target}.ndjson"]
+    attck_ics: [T0846]
+    kb_refs: [tools/oida.md]
+  - id: OT09-01
+    owasp_ot: 9
+    title: OPC UA endpoint security
+    active: true
+    modes: [safe, aggressive]
+    zone_required: false
+    purdue_max: 3
+    protocols: [opcua]
+    module: ingest
+    commands:
+      all: ["oida opcua opc.tcp://{address}:4840 --get-endpoints --json-log evidence/scans/oida-opcua-{target}.ndjson"]
+    attck_ics: [T0888]
+    kb_refs: [tools/oida.md]

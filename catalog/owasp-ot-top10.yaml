@@ -1,0 +1,335 @@
+# Check catalog for `otpa plan`. Derived from OWASP OT Top 10 (2025); OWASP lists risks,
+# not test procedures, so every check here is our derivation (see the kb_refs).
+# Fields: see catalog/README.md. Placeholders in commands: {address} {target} {device}
+# {engagement} {vendor_tcp_ports}; anything else ({capture}, {interface}) is printed as
+# <name> for the tester to fill in. Commands are printed by otpa, never run by it.
+source: "OWASP OT Top 10 2025 (2025.0.0-127-g3616452), checks derived by otpa"
+items:
+  1: Unknown Assets and Unmanaged External Access
+  2: Devices with known Vulnerabilities/Issues
+  3: Inadequate Supplier/Supply Chain Management
+  4: Loss of Availability
+  5: Insufficient Access Control
+  6: Missing Incident Detection/Reaction Capabilities
+  7: Broken Zones and Conduits Design
+  8: Missing Awareness
+  9: Insufficient Security Capabilities
+  10: Missing Hardening
+
+checks:
+  # --- 1 Unknown assets
+  - id: OT01-01
+    owasp_ot: 1
+    title: Passive asset inventory from a traffic capture
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    module: ingest
+    commands:
+      all: ["oida pcap {capture} -A --json-log {engagement}/evidence/scans/oida-pcap-{target}.ndjson"]
+    attck_ics: [T0842, T0846]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, tools/oida.md]
+  - id: OT01-02
+    owasp_ot: 1
+    title: Service inventory of the target
+    active: true
+    modes: [safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    module: ingest
+    commands:
+      # safe: TCP connect, vendor ports only, slow, light version probes
+      safe: ["nmap -sT -sV --version-light -Pn --max-rate 10 -p {vendor_tcp_ports} -oX {engagement}/evidence/scans/nmap-{target}-vendor.xml {address}"]
+      # aggressive (testbed): all TCP ports; a complete port list lets reachability say "no"
+      aggressive: ["nmap -sS -sV -p- -oX {engagement}/evidence/scans/nmap-{target}-full.xml {address}"]
+    attck_ics: [T0846, T0888]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-port-list.md, tools/nmap-ics-nse-scripts.md]
+  - id: OT01-03
+    owasp_ot: 1
+    title: Passive layer-2 discovery inside the target's zone
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: true
+    purdue_max: 5
+    module: ingest
+    commands:
+      all: ["oida discovery {interface} --json-log {engagement}/evidence/scans/oida-discovery-{target}.ndjson"]
+    attck_ics: [T0840, T0846]
+    kb_refs: [tools/oida.md]
+  - id: OT01-04
+    owasp_ot: 1
+    title: Inventory matches what was observed
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Does the owner's inventory list this device with firmware version, enabled services and remote-access paths, and does it match ports.csv and the capture?"
+    attck_ics: []
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+  - id: OT01-05
+    owasp_ot: 1
+    title: External and remote access is documented
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Is every external path to this device (VPN, remote maintenance, cloud such as Proficloud, PLCnext Store) documented with an owner and still needed?"
+    attck_ics: [T0822, T0883]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-security-checklist.md]
+
+  # --- 2 Known vulnerabilities
+  - id: OT02-01
+    owasp_ot: 2
+    title: Known CVEs for firmware and components, filtered by reachability
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    module: cves
+    commands:
+      all: ["otpa update {device}", "otpa cves {device}", "otpa ingest {engagement}"]
+    attck_ics: [T0866]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, vuln-data/vulnerability-circl-lu.md, vuln-data/certvde-knowledge-base.md]
+  - id: OT02-02
+    owasp_ot: 2
+    title: Reachable CVE candidates confirmed on the testbed
+    active: true
+    modes: [aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Which reachable Version-candidate CVEs in cves.csv were confirmed or ruled out on the testbed? Record each with otpa decide."
+    attck_ics: [T0866]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+
+  # --- 3 Supply chain
+  - id: OT03-01
+    owasp_ot: 3
+    title: Vendor vulnerability information is available
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Does the vendor publish SBOM/VEX and security advisories (PSIRT, CSAF feed) for this device, and does the owner follow them?"
+    attck_ics: []
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, vuln-data/certvde-rss-feeds.md, frameworks/csaf-2-0-spec.md]
+  - id: OT03-02
+    owasp_ot: 3
+    title: Firmware and apps are signed and checked
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Are firmware updates and installed apps signed, is the signature checked before install, and is each app risk-assessed?"
+    attck_ics: [T1693]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-security-checklist.md]
+
+  # --- 4 Availability
+  - id: OT04-01
+    owasp_ot: 4
+    title: Backup and restore are tested
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Is there a backup of the controller configuration and program, and has a restore been tested?"
+    attck_ics: [T0826]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-security-checklist.md]
+  - id: OT04-02
+    owasp_ot: 4
+    title: Robustness under network load (testbed)
+    active: true
+    modes: [aggressive]
+    zone_required: false
+    purdue_max: 3
+    manual: true
+    question: "On the testbed: does the process keep running under increased network load, and is the netload limiter configured?"
+    attck_ics: [T0814]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-security-checklist.md]
+
+  # --- 5 Access control
+  - id: OT05-01
+    owasp_ot: 5
+    title: Access matrix and named accounts
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Is there a written access matrix, are named accounts with roles used (no shared accounts), and are leavers removed?"
+    attck_ics: [T0859]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+  - id: OT05-02
+    owasp_ot: 5
+    title: No default credentials
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Are vendor default credentials changed or disabled on every interface (WBM, SSH, OPC UA, SNMP)? Check the owner's configuration."
+    attck_ics: [T1694]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-security-checklist.md]
+  - id: OT05-03
+    owasp_ot: 5
+    title: Roles are enforced (testbed)
+    active: true
+    modes: [aggressive]
+    zone_required: false
+    purdue_max: 3
+    manual: true
+    question: "On the testbed: does each role (e.g. Operator vs. Engineer) only get the rights it should in WBM and OPC UA?"
+    attck_ics: [T0859]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-security-checklist.md]
+  - id: OT05-04
+    owasp_ot: 5
+    title: MFA on remote access
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Is multi-factor authentication required on every remote-management path to this device?"
+    attck_ics: [T0822]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+
+  # --- 6 Detection
+  - id: OT06-01
+    owasp_ot: 6
+    title: Security logging leaves the device
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Is security logging enabled on the device and are logs sent to a central system (e.g. syslog over TLS)?"
+    attck_ics: []
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-security-checklist.md]
+  - id: OT06-02
+    owasp_ot: 6
+    title: This engagement's tests were detected
+    active: false
+    modes: [safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Did the scans and tests of this engagement raise alerts in the owner's monitoring? Ask for the alert export and compare with manifest.yaml."
+    attck_ics: []
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+
+  # --- 7 Zones and conduits
+  - id: OT07-01
+    owasp_ot: 7
+    title: Observed flows match the zone design
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Do the observed services and flows (ports.csv, capture) match the documented zones and conduits? Is there a direct path from IT to this zone?"
+    attck_ics: [T0886]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+  - id: OT07-02
+    owasp_ot: 7
+    title: No multi-homed device or forgotten conduit
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Is the device connected to more than one zone, or is there remote access that acts as an undocumented conduit?"
+    attck_ics: [T0886, T0822]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+
+  # --- 8 Awareness
+  - id: OT08-01
+    owasp_ot: 8
+    title: Security in tender and acceptance tests
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Were security requirements part of the tender and of FAT/SAT for this system, and are contractors trained before they get access?"
+    attck_ics: []
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+
+  # --- 9 Insufficient security capabilities
+  - id: OT09-01
+    owasp_ot: 9
+    title: OPC UA endpoint security policies
+    active: true
+    modes: [safe, aggressive]
+    zone_required: false
+    purdue_max: 3
+    protocols: [opcua]
+    module: ingest
+    commands:
+      all: ["oida opcua opc.tcp://{address}:4840 --get-endpoints --json-log {engagement}/evidence/scans/oida-opcua-{target}.ndjson"]
+    attck_ics: [T0888]
+    kb_refs: [tools/oida.md, phoenix-contact/plcnext-port-list.md]
+  - id: OT09-02
+    owasp_ot: 9
+    title: SNMP version and read access
+    active: true
+    modes: [safe, aggressive]
+    zone_required: false
+    purdue_max: 3
+    protocols: [snmp]
+    module: ingest
+    commands:
+      all: ["oida snmp {address} --json-log {engagement}/evidence/scans/oida-snmp-{target}.ndjson"]
+    attck_ics: [T0888]
+    kb_refs: [tools/oida.md]
+  - id: OT09-03
+    owasp_ot: 9
+    title: Protocols without authentication have compensating controls
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Which protocols in use lack authentication or integrity (e.g. PROFINET, Modbus TCP), and which compensating controls (isolation, monitoring) exist?"
+    attck_ics: [T1692]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]
+
+  # --- 10 Hardening
+  - id: OT10-01
+    owasp_ot: 10
+    title: Only required services are enabled
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Compare ports.csv with the vendor port list and the owner's needs: is every open service required?"
+    attck_ics: [T0886]
+    kb_refs: [owasp/owasp-ot-top-10-2025.md, phoenix-contact/plcnext-port-list.md]
+  - id: OT10-02
+    owasp_ot: 10
+    title: Vendor hardening checklist applied
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Is the vendor security checklist applied (firewall, TLS certificate, SD card settings, session and password rules)?"
+    attck_ics: []
+    kb_refs: [phoenix-contact/plcnext-security-checklist.md]
+  - id: OT10-03
+    owasp_ot: 10
+    title: Debug and removable-media paths are closed
+    active: false
+    modes: [forensics, safe, aggressive]
+    zone_required: false
+    purdue_max: 5
+    manual: true
+    question: "Are debug interfaces, USB and SD card paths disabled or physically protected?"
+    attck_ics: []
+    kb_refs: [owasp/owasp-ot-top-10-2025.md]

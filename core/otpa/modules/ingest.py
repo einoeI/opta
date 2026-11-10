@@ -156,7 +156,8 @@ def run(args, argv):
     with manifest.record(eng_dir, argv) as entry:
         scans_dir.mkdir(parents=True, exist_ok=True)
         for f in args.files:
-            shutil.copyfile(f, scans_dir / f.name)
+            if f.resolve() != (scans_dir / f.name).resolve():
+                shutil.copyfile(f, scans_dir / f.name)
         scans = sorted(scans_dir.iterdir())
         targets = {t["address"]: t["name"] for t in eng["targets"]}
         ports, oida, complete = build_ports(scans, targets)

@@ -4,6 +4,7 @@ Hand-maintained data the tool reads. Plain CSV/YAML, every row cites its source.
 
 | File | What it is |
 |---|---|
+| `owasp-ot-top10.yaml` | Checks for `otpa plan`, derived from the OWASP OT Top 10 (2025). |
 | `components.csv` | Components for the `otpa components --pick` picker, with CPE and the services they listen on. |
 | `ot-ports.csv` | OT/ICS ports, generic and vendor lists. Run `python3 core/legacy/ot_ports.py --selftest` after editing. |
 
@@ -42,3 +43,22 @@ One row per component. `otpa components --pick NAME@VERSION` matches `name` or a
 | `ports` | Well-known default ports (IANA), `port/transport`, separated by `;`. | `22/tcp` |
 | `source_url` | NVD CPE API query that confirms the CPE. | |
 | `accessed` | Date checked. | `2026-11-10` |
+
+## owasp-ot-top10.yaml
+
+`items` names the ten OWASP items; `checks` lists the checks. `otpa plan` validates the file
+on every run (and `uv run pytest` does too).
+
+| Field | Meaning |
+|---|---|
+| `id` | `OTnn-nn`, `nn` = OWASP item. |
+| `owasp_ot`, `title` | OWASP item 1-10 and a short title. |
+| `active` | `true` if it sends anything to the target. Active checks never run on Purdue L0. |
+| `modes` | Engagement modes the check belongs to: `forensics`, `safe`, `aggressive` (testbed only). |
+| `zone_required` | `true` if the tester must be inside the target's zone (attacker position `control` or `field`). |
+| `purdue_max` | Highest target Purdue level the check applies to. |
+| `protocols` | Optional: only for devices whose `device.yaml` lists one of these. |
+| `module` + `commands` | Automated: which otpa step reads the result, and commands per mode (`safe`, `aggressive`, `forensics` or `all`). Placeholders: `{address}` `{target}` `{device}` `{engagement}` `{vendor_tcp_ports}`; others print as `<name>`. |
+| `manual` + `question` | Manual: the question the tester answers with `otpa check`. |
+| `attck_ics` | ATT&CK for ICS technique ids. |
+| `kb_refs` | Paths under `knowledge/knowledge-base/`; must exist. |

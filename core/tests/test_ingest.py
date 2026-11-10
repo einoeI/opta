@@ -72,3 +72,12 @@ def test_file_order_does_not_matter(ws, tmp_path):
     early.write_bytes((SCANS / "oida-plc1.ndjson").read_bytes())
     assert ingest(ws, eng, early, SCANS / "nmap-tcp-full.xml") == 0
     assert (eng / "ports.csv").read_text() == (HERE / "golden/ports.csv").read_text()
+
+
+def test_scans_written_into_engagement_are_picked_up(ws):
+    eng = setup(ws)
+    (eng / "evidence/scans").mkdir(parents=True)
+    shutil.copy(SCANS / "nmap-tcp-full.xml", eng / "evidence/scans/nmap-plc1-full.xml")
+    assert ingest(ws, eng) == 0  # no file arguments: reads what the printed commands wrote
+    assert ingest(ws, eng, eng / "evidence/scans/nmap-plc1-full.xml") == 0  # same file: no copy error
+    assert "OpenSSH" in (eng / "ports.csv").read_text()

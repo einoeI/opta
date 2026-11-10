@@ -117,7 +117,15 @@ title, zone_required, modes, purdue_max, either `module` or `manual: true` with
 a question, attck_ics, kb_refs. Manual checks get pass/fail/n.a. + note.
 
 **plan.yaml**: catalog filtered by scope and device, sorted by OWASP item then
-check id, excluded checks listed with the reason.
+check id, excluded checks listed with the reason. A check is excluded (first
+reason wins) when the mode is not in its `modes`; it is `active` and the target
+is Purdue L0; the target's level is above `purdue_max`; the device has none of
+its `protocols`; it is `zone_required` and the attacker position is not
+`control`/`field`. Commands are per mode (`safe`/`aggressive`/`forensics`/`all`)
+and write into `evidence/scans/`; `otpa plan` prints them and logs them in the
+manifest. Catalog commands are read-only discovery and inventory; testbed-only
+checks are manual questions. Manual results: `otpa check` → `checks.yaml`
+(pass/fail/n.a. + note).
 
 **manifest.yaml** (one per engagement, one entry per command): command line,
 otpa version + git commit, external tool versions, input/output files with
@@ -134,7 +142,7 @@ appendix with non-reachable CVEs, CSV and manifest. Markdown; pandoc with a
 2. `otpa init` + engagement.yaml + manifest. **(done)**
 3. Components (SBOM / picker / free text) → CIRCL + OSV + CSAF (+ change-notes CSV) → cves.csv + decisions.yaml. **(done)**
 4. Ingest nmap XML and OIDA output → ports.csv → reachability. **(done)**
-5. `otpa plan` with the OWASP catalog (automated + manual checks).
+5. `otpa plan` with the OWASP catalog (automated + manual checks). **(done)**
 6. Overview report.
 7. Run end-to-end on the AXC F 2152 testbed before adding anything.
 

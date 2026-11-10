@@ -7,19 +7,17 @@ handling and a reproducible report. Works without an LLM. Authorized testing onl
 First device profile: **Phoenix Contact AXC F 2152** (article 2404267, firmware
 2022.0.8 LTS), a PLCnext/Yocto-Linux controller.
 
-Design and decisions: **`DESIGN.md`**. Status: steps 1-4 done (layout, `otpa init`,
-engagement.yaml, manifest, components, CVE sources, cves.csv, decisions, scan ingest,
-reachability).
+Design and decisions: **`DESIGN.md`**. Status: steps 1-5 done; the report (step 6) is next. How to use it: see below.
 
 ## Layout
 
 | Folder | What is in it |
 |---|---|
 | `core/` | The `otpa` package (`core/otpa/`, commands in `core/otpa/modules/`) and its tests (`core/tests/`). `core/legacy/` holds the research scripts that become modules: `probe_vuln_lookup.py` (CIRCL + CERT@VDE coverage check), `crosscheck_firmware.py` (change-notes CVEs vs CIRCL, CVSS enrichment), `ot_ports.py` (port lookup). Each has `--selftest`. |
-| `catalog/` | Hand-maintained data the tool reads: `ot-ports.csv` (see `catalog/README.md`). |
+| `catalog/` | Hand-maintained data the tool reads: `owasp-ot-top10.yaml` (checks), `components.csv`, `ot-ports.csv` (see `catalog/README.md`). |
 | `knowledge/` | Knowledge base: `knowledge-base/` (one cited entry per source, start at `INDEX.md`), `sources/` (local PDFs, check licences before sharing), `data/` (generated CSV), `notes/` (research notes, reports, handoff prompt), and the scripts `build_index.py`, `new_entry.py`, `extract_pdf.py`. |
 | `vendor/` | Third-party repos. `ot-security-agent-skills` (selmux, PCAP forensics for Modbus/BACnet/S7/IEC-104) as git submodule. |
-| `workspace/` | Device and engagement data. Gitignored. `devices/phoenix-contact/axc-f-2152/2022.0.8/` holds `device.yaml`, the vendor change-notes CVE list, the enriched CSV and the CIRCL snapshot. |
+| `workspace/` | Device and engagement data. Gitignored. `devices/<vendor>/<model>/<fw>/` holds `device.yaml`, `components.csv`, `overrides.csv`, `snapshots/` and `cves.csv`; `engagements/<date>-<name>/` holds one engagement. |
 
 ## Setup
 
@@ -35,61 +33,120 @@ git submodule update --init
 Run everything through uv: `uv run otpa ...`, `uv run pytest`, `uv run python knowledge/build_index.py`.
 After changing dependencies in `pyproject.toml`, run `uv lock` and commit `uv.lock`.
 
-## Using otpa
+## How to use this version (steps 1-5)
+
+What works: engagements, components, CVE sources, `cves.csv`, overrides, decisions, plan
+with printed commands, manual check results, scan ingest with reachability. Not yet: the
+report (step 6). otpa never runs nmap or OIDA itself; it prints the commands, you run them.
+
+All commands below run from the repo root. Each command that writes something adds an entry
+to `manifest.yaml` (engagement or device folder). Every command has `-h`.
+
+### 0. Check the install
 
 ```
-uv run otpa init axc-testbed --tester "Name" --environment testbed --mode aggressive \
-  --attacker-position control \
-  --target name=plc1,address=192.168.1.10,zone=cell-1,purdue=1,device=phoenix-contact/axc-f-2152/2022.0.8
-uv run pytest              # tests
+uv sync
+uv run pytest -q           # all tests should pass
+uv run otpa -h             # lists the commands
 ```
 
-Leave out any flag and `init` asks for it. `--target` can be repeated; `conduit=` is optional;
-`device` is a folder under `workspace/devices/`. The result is
-`workspace/engagements/<date>-<name>/` with `engagement.yaml` and `manifest.yaml`.
-`engagement.yaml` is validated on every load: `aggressive` needs `testbed`, `runtime` is
-refused, Purdue level is 0-5.
+### 1. Device data and CVEs (once per device and firmware)
 
-### Components and CVEs for a device
+The AXC F 2152 / 2022.0.8 profile is already in `workspace/devices/`. For another device,
+copy its folder and edit `device.yaml` (vendor, model, article_no, firmware, protocols,
+`circl_products`, `csaf_feed`, change notes file).
 
 ```
 D=phoenix-contact/axc-f-2152/2022.0.8
-uv run otpa components $D --sbom bom.json --pick openssh@8.9p1 --free "codesys runtime@3.5"
-uv run otpa update $D      # network: CIRCL, CSAF feed, OSV -> snapshots/ (~1 min)
-uv run otpa update $D --cvss   # optional: also NVD CVSS for every CVE (~40 min first time without NVD_API_KEY)
-uv run otpa cves $D        # offline: snapshots -> cves.csv
-uv run otpa decide workspace/engagements/<date>-<name> plc1 CVE-2023-46144 Reproduced --evidence evidence/poc.pcap
+uv run otpa components $D --pick openssh@8.9p1          # optional: --sbom bom.json, --free "name@ver"
+uv run otpa update $D                                   # network, ~1 min; add --cvss for NVD scores
+uv run otpa cves $D                                     # offline -> cves.csv
 ```
 
-`update` is the only command that uses the network. It saves every response under
-`snapshots/<date>/<source>/` and lists it with SHA-256 in `snapshots/index.csv`; NVD
-responses already saved are not fetched again. Without `--cvss`, scores come from the
-vendor's CSAF advisories where they have one; `cvss_source` in `cves.csv` says which. For
-`--cvss`, put `export NVD_API_KEY=...` (free from NVD) in `~/.config/otpa/nvd.env` and source
-it from `~/.bashrc`; that is about 10x faster. `cves` reads the newest snapshot per source and key, so the same snapshots
-always give the same `cves.csv`. Labels and source order: see DESIGN.md.
+Look at `workspace/devices/$D/cves.csv`: one row per CVE and CVSS version, with `label`,
+`source`, `vendor_fixed_in`, `note`. Facts the tool cannot read go in `overrides.csv` in the
+same folder (`cve,label,fixed_in,reason,source_url`); rerun `otpa cves $D` after editing it.
 
-Facts the tool cannot read (e.g. "before 2021.0 LTS" only in a CVE's description) go in
-`overrides.csv` in the device folder: `cve,label,fixed_in,reason,source_url`, label
-`Not-affected` or `Version-candidate`. They apply to every engagement with that device;
-`decide` is for one target in one engagement.
-
-`decide` labels: `Reproduced` (needs `--evidence`), `Not-affected` and `False-positive`
-(need `--reason`).
-
-### Scans and reachability
+### 2. Create an engagement
 
 ```
-nmap -sS -sV -p- -oX scan.xml 192.168.1.10           # print/run per your plan and mode
-oida --json-log oida.ndjson opcua ...                 # OIDA: always pass --json-log
-uv run otpa ingest workspace/engagements/<date>-<name> scan.xml oida.ndjson
-uv run otpa ingest workspace/engagements/<date>-<name>   # rebuild only, e.g. after decide or cves
+uv run otpa init axc-lab
 ```
 
-`ingest` copies the files to `evidence/scans/` and rebuilds `ports.csv`, `oida.csv` (OIDA
-findings) and `cves.csv` (per target: device CVEs with `reachable`, `Observed`, decisions)
-from all stored scans. `reachable` is only `no` after a full `-p-` scan of that transport;
-otherwise it stays `unknown`.
+It asks for tester, environment (`live`/`testbed`), mode (`forensics`/`safe`/`aggressive`),
+attacker position and targets. The same works with flags:
+
+```
+uv run otpa init axc-lab --tester "Name" --environment testbed --mode aggressive \
+  --attacker-position control \
+  --target name=plc1,address=192.168.1.10,zone=cell-1,purdue=1,device=$D
+E=workspace/engagements/$(date +%F)-axc-lab
+```
+
+Things worth trying: `aggressive` with `live` is refused; Ctrl-C during the questions writes
+nothing; a second target with `purdue=0` gets no active checks in the plan.
+
+### 3. Plan
+
+```
+uv run otpa plan $E
+```
+
+Writes `$E/plan.yaml` and prints per target the checks from `catalog/owasp-ot-top10.yaml`
+with their commands (`$`) or questions (`?`). Excluded checks are in `plan.yaml` with the
+reason. Compare an engagement in `live`/`safe` with one in `testbed`/`aggressive`: the safe
+plan has a slow vendor-port scan, the aggressive one a full `-p-` scan and testbed-only
+checks. Placeholders like `<interface>` and `<capture>` are yours to fill in.
+
+Record manual check results (note required):
+
+```
+uv run otpa check $E plc1 OT05-01 fail --note "no access matrix exists"
+uv run otpa plan $E        # status column now shows fail
+```
+
+### 4. Scans and reachability
+
+Run the printed commands yourself (they write into `$E/evidence/scans/`; always keep
+OIDA's `--json-log`), then:
+
+```
+uv run otpa ingest $E                       # reads everything in evidence/scans/
+uv run otpa ingest $E other-scan.xml        # or give files from elsewhere; they are copied in
+```
+
+Dry run without the PLC, with the sample scans from the tests (they assume target
+192.168.1.10):
+
+```
+uv run otpa ingest $E core/tests/fixtures/scans/nmap-tcp-full.xml core/tests/fixtures/scans/oida-plc1.ndjson
+```
+
+Results in `$E`: `ports.csv` (ports per target), `oida.csv` (OIDA findings), `cves.csv`
+(device CVEs per target with `reachable` yes/no/unknown, `Observed` where nmap shows the same
+product and version, and your decisions). `reachable` is only `no` after a full `-p-` scan.
+
+### 5. Decisions on CVEs
+
+```
+mkdir -p $E/evidence && cp proof.txt $E/evidence/
+uv run otpa decide $E plc1 CVE-2022-37434 Reproduced --evidence evidence/proof.txt
+uv run otpa decide $E plc1 CVE-2021-3672 Not-affected --reason "c-ares not used"
+uv run otpa ingest $E      # re-applies decisions to cves.csv
+```
+
+`Reproduced` needs an evidence file inside the engagement; `Not-affected` and
+`False-positive` need a reason. Editing the evidence file afterwards makes every later
+command stop with "changed since the decision".
+
+### Notes
+
+- `otpa update` is the only command that uses the network. Responses are kept under
+  `snapshots/<date>/` with SHA-256 in `snapshots/index.csv`, so `cves` gives the same output
+  for the same snapshots.
+- For `--cvss`: put `export NVD_API_KEY=...` in `~/.config/otpa/nvd.env` and source it from
+  `~/.bashrc`; about 10x faster.
+- To start over, delete the engagement folder. `workspace/` is not in git.
 
 ## PDF extraction: which tool and why
 
