@@ -1,0 +1,11 @@
+# Optional: high-quality PDF -> Markdown for extract_pdf.py (headings, tables,
+# lists, links, multi-column reading order, OCR of text in images).
+# MIT licence (docling, docling-core, docling-parse). Tested with docling 2.150.0.
+# Size: ~1.5 GB installed (CPU PyTorch) + ~0.5 GB models downloaded on first run
+# into ~/.cache/huggingface. For air-gapped use, run it once online, then copy that cache.
+# Speed: roughly 5-10 s per page on CPU.
+#
+# CPU-only install (avoids the multi-GB CUDA build of PyTorch):
+#   pip install -r requirements-docling.txt --extra-index-url https://download.pytorch.org/whl/cpu
+-r requirements.txt
+docling~=2.150

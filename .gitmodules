@@ -1,0 +1,3 @@
+[submodule "vendor/ot-security-agent-skills"]
+	path = vendor/ot-security-agent-skills
+	url = https://github.com/selmux/ot-security-agent-skills.git

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OT/ICS scouting feeds. Every xmlUrl returned HTTP 200 with a parseable RSS/Atom body and 2025-2026 items on 2026-11-10. -->
+<opml version="2.0">
+<head>
+  <title>OT/ICS security scouting feeds (verified 2026-11-10)</title>
+  <dateCreated>Tue, 10 Nov 2026 09:00:00 +0100</dateCreated>
+</head>
+<body>
+  <outline text="1 Advisories (weekly, primary)" title="1 Advisories (weekly, primary)">
+    <outline type="rss" text="CISA ICS Advisories" xmlUrl="https://www.cisa.gov/cybersecurity-advisories/ics-advisories.xml" htmlUrl="https://www.cisa.gov/news-events/cybersecurity-advisories"/>
+    <outline type="rss" text="CISA ICS Medical Advisories" xmlUrl="https://www.cisa.gov/cybersecurity-advisories/ics-medical-advisories.xml" htmlUrl="https://www.cisa.gov/news-events/cybersecurity-advisories"/>
+    <outline type="rss" text="cisagov/CSAF commits (machine-readable ICS advisories)" xmlUrl="https://github.com/cisagov/CSAF/commits/develop.atom" htmlUrl="https://github.com/cisagov/CSAF"/>
+    <outline type="rss" text="CERT@VDE Advisories (all vendors)" xmlUrl="https://certvde.com/de/advisories/feeds/rss/" htmlUrl="https://certvde.com/de/advisories/"/>
+    <outline type="rss" text="CERT@VDE Advisories Phoenix Contact" xmlUrl="https://certvde.com/de/advisories/vendor/phoenixcontact/feeds/rss/" htmlUrl="https://certvde.com/de/advisories/vendor/phoenixcontact/"/>
+    <outline type="rss" text="CERT@VDE Advisories CODESYS" xmlUrl="https://certvde.com/de/advisories/vendor/codesys/feeds/rss/" htmlUrl="https://certvde.com/de/advisories/vendor/codesys/"/>
+    <outline type="rss" text="CERT@VDE Advisories WAGO" xmlUrl="https://certvde.com/de/advisories/vendor/wago/feeds/rss/" htmlUrl="https://certvde.com/de/advisories/vendor/wago/"/>
+    <outline type="rss" text="CERT@VDE Advisories Beckhoff" xmlUrl="https://certvde.com/de/advisories/vendor/beckhoff/feeds/rss/" htmlUrl="https://certvde.com/de/advisories/vendor/beckhoff/"/>
+    <outline type="rss" text="Siemens ProductCERT Advisories" xmlUrl="https://cert-portal.siemens.com/productcert/rss/advisories.atom" htmlUrl="https://cert-portal.siemens.com/productcert/"/>
+    <outline type="rss" text="ABB PSIRT Alerts and Notifications" xmlUrl="https://psirt.abb.com/rss/abbrssfeed.xml" htmlUrl="https://global.abb/group/en/technology/cyber-security/alerts-and-notifications"/>
+    <outline type="rss" text="Claroty Team82 Disclosure Dashboard" xmlUrl="https://claroty.com/team82/disclosure-dashboard/feed" htmlUrl="https://claroty.com/team82/disclosure-dashboard"/>
+    <outline type="rss" text="BSI CERT-Bund WID Sicherheitshinweise" xmlUrl="https://wid.cert-bund.de/content/public/securityAdvisory/rss" htmlUrl="https://wid.cert-bund.de/"/>
+    <outline type="rss" text="BSI Cyber-Sicherheitswarnungen" xmlUrl="https://www.bsi.bund.de/SiteGlobals/Functions/RSSFeed/RSSNewsfeed/RSSNewsfeed_CSW.xml" htmlUrl="https://www.bsi.bund.de/DE/Service-Navi/Abonnements/RSS/rss_node.html"/>
+    <outline type="rss" text="CERT-EU Security Advisories" xmlUrl="https://cert.europa.eu/publications/security-advisories-rss" htmlUrl="https://cert.europa.eu/publications/security-advisories"/>
+  </outline>
+  <outline text="2 Vendor research and threat intel" title="2 Vendor research and threat intel">
+    <outline type="rss" text="Kaspersky ICS CERT" xmlUrl="https://ics-cert.kaspersky.com/feed/" htmlUrl="https://ics-cert.kaspersky.com/"/>
+    <outline type="rss" text="Dragos Blog (partial feed)" xmlUrl="https://www.dragos.com/blog.rss" htmlUrl="https://www.dragos.com/blog/"/>
+    <outline type="rss" text="Forescout (incl. Vedere Labs)" xmlUrl="https://www.forescout.com/feed/" htmlUrl="https://www.forescout.com/research-labs/"/>
+    <outline type="rss" text="Microsoft Threat Intelligence blog" xmlUrl="https://www.microsoft.com/en-us/security/blog/topic/threat-intelligence/feed/" htmlUrl="https://www.microsoft.com/en-us/security/blog/topic/threat-intelligence/"/>
+    <outline type="rss" text="Google Threat Intelligence (Mandiant)" xmlUrl="https://cloudblog.withgoogle.com/topics/threat-intelligence/rss/" htmlUrl="https://cloud.google.com/blog/topics/threat-intelligence"/>
+  </outline>
+  <outline text="3 News and commentary" title="3 News and commentary">
+    <outline type="rss" text="Industrial Cyber" xmlUrl="https://industrialcyber.co/feed/" htmlUrl="https://industrialcyber.co/"/>
+    <outline type="rss" text="SecurityWeek ICS/OT" xmlUrl="https://www.securityweek.com/category/ics-ot/feed/" htmlUrl="https://www.securityweek.com/category/ics-ot/"/>
+    <outline type="rss" text="Security Affairs ICS-SCADA" xmlUrl="https://securityaffairs.com/category/ics-scada/feed" htmlUrl="https://securityaffairs.com/category/ics-scada"/>
+    <outline type="rss" text="Control Global (home)" xmlUrl="https://www.controlglobal.com/__rss/website-scheduled-content.xml?input=%7B%22sectionAlias%22%3A%22home%22%7D" htmlUrl="https://www.controlglobal.com/"/>
+    <outline type="rss" text="heise Security (DE)" xmlUrl="https://www.heise.de/security/rss/news-atom.xml" htmlUrl="https://www.heise.de/security/"/>
+    <outline type="rss" text="CERT.at Blog (DE)" xmlUrl="https://www.cert.at/cert-at.de.blog.rss_2.0.xml" htmlUrl="https://www.cert.at/"/>
+    <outline type="rss" text="Dale Peterson blog" xmlUrl="https://dale-peterson.com/feed/" htmlUrl="https://dale-peterson.com/"/>
+    <outline type="rss" text="S4 Events" xmlUrl="https://s4xevents.com/feed/" htmlUrl="https://s4xevents.com/"/>
+    <outline type="rss" text="Unsolicited Response podcast" xmlUrl="https://unsolicitedresponse.libsyn.com/rss" htmlUrl="https://unsolicitedresponse.libsyn.com/"/>
+    <outline type="rss" text="Reddit r/ICS" xmlUrl="https://www.reddit.com/r/ICS/.rss" htmlUrl="https://www.reddit.com/r/ICS/"/>
+    <outline type="rss" text="Reddit r/SCADA" xmlUrl="https://www.reddit.com/r/SCADA/.rss" htmlUrl="https://www.reddit.com/r/SCADA/"/>
+  </outline>
+  <outline text="4 Standards and institutions" title="4 Standards and institutions">
+    <outline type="rss" text="NIST CSRC Drafts Open for Comment" xmlUrl="https://csrc.nist.gov/CSRC/media/feeds/pubs/drafts-open-for-comment.xml" htmlUrl="https://csrc.nist.gov/publications/drafts-open-for-comment"/>
+    <outline type="rss" text="NIST Cybersecurity Insights blog" xmlUrl="https://www.nist.gov/blogs/cybersecurity-insights/rss.xml" htmlUrl="https://www.nist.gov/blogs/cybersecurity-insights"/>
+    <outline type="rss" text="Allianz fuer Cybersicherheit (BSI)" xmlUrl="https://www.bsi.bund.de/SiteGlobals/Functions/RSSFeed/RSSNewsfeed/ACS_RSSNewsfeed.xml" htmlUrl="https://www.allianz-fuer-cybersicherheit.de/"/>
+    <outline type="rss" text="BSI Presse und Veranstaltungen" xmlUrl="https://www.bsi.bund.de/SiteGlobals/Functions/RSSFeed/RSSNewsfeed/RSSNewsfeed_Presse_Veranstaltungen.xml" htmlUrl="https://www.bsi.bund.de/"/>
+  </outline>
+  <outline text="5 Talks (YouTube channel feeds)" title="5 Talks (YouTube channel feeds)">
+    <outline type="rss" text="S4 Events (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC5MdLu7ji_eyGiTfigk75lQ" htmlUrl="https://www.youtube.com/@S4Events"/>
+    <outline type="rss" text="SANS ICS (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCXJoSUuG6wQ_9NymBpZP2FQ" htmlUrl="https://www.youtube.com/@SANSICS"/>
+    <outline type="rss" text="ICS Village (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCI_GT2-OMrsqqglv0JijHhw" htmlUrl="https://www.youtube.com/@ICSVillage"/>
+    <outline type="rss" text="CS3STHLM (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCkD15o_9eJxUc9eeHtWSQ6Q" htmlUrl="https://www.youtube.com/@CS3STHLM"/>
+    <outline type="rss" text="TROOPERS (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCPY5aUREHmbDO4PtR6AYLfQ" htmlUrl="https://www.youtube.com/user/TROOPERScon"/>
+    <outline type="rss" text="hardwear.io (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UChwYb9xc9tZXquQxu4G0l_g" htmlUrl="https://hardwear.io/"/>
+    <outline type="rss" text="Mike Holcomb / utilsec (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCKO03V8KB-kgWedXTFdaEHA" htmlUrl="https://www.youtube.com/@utilsec"/>
+    <outline type="rss" text="Dragos (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC3Ii8YoD6qKJQ1KGYu4RXYw" htmlUrl="https://www.youtube.com/@DragosInc"/>
+    <outline type="rss" text="DEF CON (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC6Om9kAkl32dWlDSNlDS9Iw" htmlUrl="https://www.youtube.com/@DEFCONConference"/>
+    <outline type="rss" text="Black Hat (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UCJ6q9Ie29ajGqKApbLqfBOg" htmlUrl="https://www.youtube.com/@BlackHatOfficialYT"/>
+    <outline type="rss" text="media.ccc.de (YouTube)" xmlUrl="https://www.youtube.com/feeds/videos.xml?channel_id=UC2TXq_t06Hjdr2g_KdKpHQg" htmlUrl="https://www.youtube.com/@mediacccde"/>
+    <outline type="rss" text="media.ccc.de recent releases" xmlUrl="https://media.ccc.de/updates.rdf" htmlUrl="https://media.ccc.de/"/>
+  </outline>
+  <outline text="6 Academic" title="6 Academic">
+    <outline type="rss" text="arXiv API: cs.CR + industrial control" xmlUrl="http://export.arxiv.org/api/query?search_query=abs:%22industrial%20control%22+AND+cat:cs.CR&amp;sortBy=submittedDate&amp;sortOrder=descending&amp;max_results=20" htmlUrl="https://arxiv.org/list/cs.CR/recent"/>
+    <outline type="rss" text="arXiv API: cs.CR + PLC" xmlUrl="http://export.arxiv.org/api/query?search_query=abs:PLC+AND+cat:cs.CR&amp;sortBy=submittedDate&amp;sortOrder=descending&amp;max_results=20" htmlUrl="https://arxiv.org/list/cs.CR/recent"/>
+  </outline>
+  <outline text="7 Code, data, frameworks" title="7 Code, data, frameworks">
+    <outline type="rss" text="MITRE ATT&amp;CK STIX data releases" xmlUrl="https://github.com/mitre-attack/attack-stix-data/releases.atom" htmlUrl="https://github.com/mitre-attack/attack-stix-data"/>
+    <outline type="rss" text="MITRE ATT&amp;CK blog (Medium)" xmlUrl="https://medium.com/feed/mitre-attack" htmlUrl="https://medium.com/mitre-attack"/>
+    <outline type="rss" text="cisagov/ICSNPP commits" xmlUrl="https://github.com/cisagov/ICSNPP/commits.atom" htmlUrl="https://github.com/cisagov/ICSNPP"/>
+    <outline type="rss" text="cisagov/icsnpp-modbus releases" xmlUrl="https://github.com/cisagov/icsnpp-modbus/releases.atom" htmlUrl="https://github.com/cisagov/icsnpp-modbus"/>
+    <outline type="rss" text="Orange-Cyberdefense/awesome-industrial-protocols commits" xmlUrl="https://github.com/Orange-Cyberdefense/awesome-industrial-protocols/commits.atom" htmlUrl="https://github.com/Orange-Cyberdefense/awesome-industrial-protocols"/>
+    <outline type="rss" text="ITI/ICS-Security-Tools commits" xmlUrl="https://github.com/ITI/ICS-Security-Tools/commits.atom" htmlUrl="https://github.com/ITI/ICS-Security-Tools"/>
+    <outline type="rss" text="hslatman/awesome-industrial-control-system-security commits" xmlUrl="https://github.com/hslatman/awesome-industrial-control-system-security/commits.atom" htmlUrl="https://github.com/hslatman/awesome-industrial-control-system-security"/>
+    <outline type="rss" text="EMBA releases" xmlUrl="https://github.com/e-m-b-a/emba/releases.atom" htmlUrl="https://github.com/e-m-b-a/emba"/>
+    <outline type="rss" text="GRFICSv3 commits" xmlUrl="https://github.com/Fortiphyd/GRFICSv3/commits.atom" htmlUrl="https://github.com/Fortiphyd/GRFICSv3"/>
+  </outline>
+</body>
+</opml>

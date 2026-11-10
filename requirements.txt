@@ -1,0 +1,9 @@
+# All pip dependencies, pinned. Python 3.11+.
+#   python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
+# Optional, ~2 GB: requirements-docling.txt (best PDF -> Markdown for knowledge/).
+# Non-pip tools (nmap, pandoc, syft) are checked by `otpa doctor`.
+
+pypdf~=7.0           # knowledge/new_entry.py, extract_pdf.py. BSD-3-Clause.
+PyYAML~=6.0.3        # engagement.yaml, plan.yaml, decisions.yaml, manifest.yaml. MIT.
+pytest~=9.2          # tests. MIT.
+oida-ics[all]~=1.0.6 # active OT testing on the testbed. AGPL-3.0: called as subprocess, never imported.

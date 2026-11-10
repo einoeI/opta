@@ -1,0 +1,14 @@
+workspace/
+__pycache__/
+.venv/
+*.pyc
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.env
+.vscode/
+.idea/
+*:Zone.Identifier
+Thumbs.db
+desktop.ini
